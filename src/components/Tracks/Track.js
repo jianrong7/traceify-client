@@ -6,7 +6,7 @@ export default function Track({ track }) {
     <a href={track.uri}>
       <div className="border-b-2 py-3 px-4 flex flex-row justify-between items-center">
         <div className="max-w-xs flex flex-row items-center">
-          <img src={track.album.images[0]?.url} alt="album-cover" className="h-10" />
+          <img src={track.album.images[0]?.url} alt="album-cover" className="h-10 ml-2" />
           <div>
             
             <p className="font-semibold">{track.name}</p>
