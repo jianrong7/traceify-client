@@ -15,7 +15,7 @@ function Main({ accessToken }) {
       <CurrentPlayingSection accessToken={accessToken} />
       <div className="mx-4 mt-5 border-b-2"></div>
       <ShareSection />
-      <Link className="text-sm text-blue-500 underline" to="/playlists">View pass</Link>
+      <Link className="text-sm text-blue-500 underline text-center" to="/playlists">View your playlists</Link>
     </div>
   )
 }
