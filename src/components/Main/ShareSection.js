@@ -6,7 +6,7 @@ export default function ShareSection() {
   const [showPopup, setShowPopup] = useState(false);
 
   const copy = () => {
-    var text = "http://localhost:3000";
+    var text = "https://traceify-client.netlify.app";
     navigator.clipboard.writeText(text).catch(err => console.log(err))
     setShowPopup(prev => !prev)
   }
