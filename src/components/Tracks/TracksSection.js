@@ -3,7 +3,7 @@ import Track from './Track';
 import sort from '../assets/sort.png';
 
 export default function TracksSection({ tracks, searchValue }) {
-  console.log(tracks)
+
   return (
     <div>
       <p className="bg-gray-200 py-1 px-3 flex flex-row justify-between items-center">

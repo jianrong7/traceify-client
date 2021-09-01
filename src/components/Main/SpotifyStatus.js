@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import user from '../assets/user.png';
 
 export default function SpotifyStatus({ userData }) {
   const [color, setColor] = useState({
@@ -19,8 +20,10 @@ export default function SpotifyStatus({ userData }) {
   if (!userData) return null
   return (
     <a className={`${color.bg} w-5/12 items-center flex flex-col text-center rounded p-2`} href={userData.uri}>
-      <span className={`${color.text} font-semibold text-sm`}>{userData.product === 'premium' ? "Premium" : "Not premium"}</span>
-      <img src={userData.images[0].url} alt='profileImage' className="h-12 mt-2"/>
+      <span className={`${color.text} font-semibold text-sm`}>
+        {userData.product === undefined ? `Popularity: ${userData.popularity}`: userData.product === 'premium' ? "Premium" : "Not premium"}
+      </span>
+      <img src={userData.images[0]?.url ? userData.images[0].url : user} alt='profileImage' className="h-10 mt-3"/>
     </a>
   )
 }

@@ -10,7 +10,7 @@ function Main({ accessToken }) {
     <div className="flex flex-col justify-center">
       <Header />
       <LoginSection accessToken={accessToken} />
-      <ButtonSection />
+      <ButtonSection accessToken={accessToken} />
       <CurrentPlayingSection accessToken={accessToken} />
       <div className="mx-4 mt-5 border-b-2"></div>
       <ShareSection />

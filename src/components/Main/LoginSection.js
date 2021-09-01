@@ -1,34 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 
+import useCurrentUser from '../hooks/useCurrentUser'; 
+import useFavoriteArtist from '../hooks/useFavoriteArtist';
+import refresh from '../assets/refresh.png';
 import Follower from './Follower';
 import SpotifyStatus from './SpotifyStatus';
 
 export default function LoginSection({ accessToken }) {
-  const [userData, setUserData] = useState(null);
-
-  useEffect(() => {
-    if (!accessToken) { return; };
-    const source = axios.CancelToken.source();
-    const config = {
-      headers: { Authorization: `Bearer ${accessToken}` },
-      cancelToken: source.token
-    }
-
-    axios.get('https://api.spotify.com/v1/me', config)
-      .then(data => setUserData(data.data))
-      .catch(err => console.log(err))
-
-    return () => { source.cancel('Axios request canceled.') }
-  }, [accessToken])
+  const [showArtist, setShowArtist] = useState(false);
+  const userData = useCurrentUser(accessToken);
+  const artist = useFavoriteArtist(accessToken);
 
   return (
     <div>
       <div className="flex flex-col pt-3 px-3 h-40">
-        <p className="font-semibold">Your COVID Health Status</p>
+        <div className="flex flex-row justify-between items-center">
+          <p className="font-semibold">{showArtist ? artist.name + "'s Status" : 'Your COVID Health Status'}</p>
+          <button onClick={() => setShowArtist(prevState => !prevState)}>
+            <img src={refresh} alt="refresh" className="h-4" />
+          </button>
+        </div>
         <div className="flex flex-row justify-between h-full p-3">
-          <SpotifyStatus userData={userData} />
-          <Follower userData={userData} />
+          {showArtist ?
+          <>
+            <SpotifyStatus userData={artist} />
+            <Follower userData={artist} /> 
+          </>
+          :
+          <>
+            <SpotifyStatus userData={userData} />
+            <Follower userData={userData} />
+          </>
+          }
+
         </div>
       </div>
       <div className="mx-4 mt-3 border-b-2"></div>
